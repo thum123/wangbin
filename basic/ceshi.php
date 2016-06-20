@@ -1,5 +1,5 @@
 <?php
-var_dump($_SERVER);die;
+// var_dump($_SERVER);die;
 /**
   * wechat php test
   */
@@ -7,8 +7,7 @@ var_dump($_SERVER);die;
 //define your token
 //http://***/we-test.php?echostr=123?signature=ebb2f8651e4619c6ca5c943817564a5868f0cd74&timestamp=bb&nonce=cc
 $tok = $_GET['tok'];
-$pdo = new PDO('mysql:host=lhnwletzedzb.rds.sae.sina.com.cn;port=10157;dbname=ceshi','thum','123123');
-$pdo -> exec('set names utf8');
+require('pdo.php');
 $data = $pdo -> query("select * from account where tok = '$tok'") -> fetch(PDO::FETCH_ASSOC);
 //var_dump($data['we_id']);die;
 //var_dump($data);die;
@@ -30,29 +29,14 @@ foreach($info as $k=>$v)
 {
     if($v['type']==0&&$v['f_id']==0)
     {
-        //$sqls = "select * from menu where f_id = '$v[we_id]'";
-        // $con[$k]['son'] = $pdo -> query($sqls) -> fetchAll(PDO::FETCH_ASSOC);
         $con[0] = $v;
     }
     elseif($v['type']==1&&$v['f_id']==0)
     {
-        //$sqls = "select * from menu where f_id = '$v[we_id]'";
-        //$con[$k]['son'] = $pdo -> query($sqls) -> fetchAll(PDO::FETCH_ASSOC);
         $con[1] = $v;
     }
 }
-//$thum = array();
-//var_dump($con);die;
-//$sqls = "select * from menu where f_id != '0'";
-//  $son=$pdo -> query($sqls) -> fetchAll(PDO::FETCH_ASSOC);
-//var_dump($son);die;
-//echo count($son);die;
-//for($i=0; $i<count($son); $i++)
-//{
-    //echo $son[$i]['f_id'];die;
-//  var_dump($son[$i]);die;
-//}
-//echo $con[0]['me_id'];die;
+
 foreach($con as $k=>$v)
 {
     // $me_id = $v[' me_id'];
@@ -61,11 +45,6 @@ foreach($con as $k=>$v)
     $con[$k]['son'] = $pdo -> query($sqls) -> fetchAll(PDO::FETCH_ASSOC);  
 
 }
-//var_dump($con);die;
-//var_dump($con);die;
-//var_dump($arr);die;
-//echo $arr[0][keywords];die;
-//print_r($con);die;
 define("TOKEN", "$data[token]");
 define("APPID", "$data[appid]");
 define("APPSECRET", "$data[appsecret]");
@@ -114,9 +93,9 @@ class wechatCallbackapiTest
 	
 	public function createMenu($info){
         // echo 123;die;
-        // $accessToken=$this->getAccesstoken();die;
+        $accessToken=$this->getAccesstoken(); 
         //return $info;die;
-        $accessToken = "RIsY004XJScwRfq4UEUykmXB9JfCqr5Dm67U4gtIH42lnOnxoyrmuGHAi36Zp3OsThNzAFINgeHOiEhvzPNMxlznhbcXaw5w08f0tcggHC_hdnTY1qqFamZLVUkDIjLOLJUdABAUSD";
+        //$accessToken = "RIsY004XJScwRfq4UEUykmXB9JfCqr5Dm67U4gtIH42lnOnxoyrmuGHAi36Zp3OsThNzAFINgeHOiEhvzPNMxlznhbcXaw5w08f0tcggHC_hdnTY1qqFamZLVUkDIjLOLJUdABAUSD";
 		$url="https://api.weixin.qq.com/cgi-bin/menu/create?access_token=".$accessToken;
         // return $url;die;
         $data = "";

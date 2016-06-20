@@ -54,6 +54,9 @@
                     <li>
                         <label class="res-lab">数据库地址</label><span class="res-info"><input type="text" name='shujuku'></span>
                     </li>
+                     <li>
+                        <label class="res-lab">端口</label><span class="res-info"><input type="text" name='duankou'></span>
+                    </li>
                     <li>
                         <label class="res-lab">用户名</label><span class="res-info"><input type="text" name='name'></span>
                     </li>

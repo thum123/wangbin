@@ -8,6 +8,7 @@ header('content-type:text/html;charset=utf-8');
 error_reporting(0);
 		$name = $data['name'] = $_POST['name'];
 		$shujuku = $data['shujuku'] = $_POST['shujuku'];
+		$duankou = $_POST['duankou'];
 		// echo $shujuku;die;
 		$pass = $data['pass'] = $_POST['pass'];
 		$ku_name = $data['ku_name'] = $_POST['ku_name'];
@@ -33,6 +34,11 @@ error_reporting(0);
 							    'charset' => 'utf8',
 							];";
 						$res = file_put_contents('./config/db.php', $str);
+						$reg = '
+						$pdo = new PDO("mysql:host='.$data['shujuku'].';port='.$duankou.';dbname='.$data['ku_name'].'","'.$data['name'].'","'.$data['pass'].'");
+						$pdo -> exec("set names utf8");
+						';
+						file_put_contents('pdo.php', $reg);
 						if($res)
 						{
 							 header("refresh:0;url=$url2");die;
